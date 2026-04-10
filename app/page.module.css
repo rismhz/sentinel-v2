@@ -184,7 +184,7 @@
 
 /* ── MOBILE BREAKPOINTS ── */
 @media (max-width: 900px) {
-  :root{--panel-w-l:220px;--panel-w-r:200px;}
+  :global(:root){--panel-w-l:220px;--panel-w-r:200px;}
 }
 
 @media (max-width: 768px) {
@@ -214,7 +214,7 @@
 }
 
 @media (max-width: 480px) {
-  :root{--header-h:48px;}
+  :global(:root){--header-h:48px;}
   .hName{font-size:14px;letter-spacing:3px;}
   .hSub{display:none;}
   .badge{display:none;}
