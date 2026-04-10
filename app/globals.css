@@ -51,6 +51,14 @@ body.flir .cesium-widget canvas { filter: saturate(0) brightness(0.65) sepia(1) 
 
 /* Cesium cleanup */
 .cesium-widget-credits,
+
+/* Responsive CSS variable overrides */
+@media (max-width: 900px) {
+    :root { --panel-w-l: 220px; --panel-w-r: 200px; }
+}
+@media (max-width: 480px) {
+    :root { --header-h: 48px; }
+}
 .cesium-viewer-toolbar,
 .cesium-viewer-animationContainer,
 .cesium-viewer-timelineContainer,
