@@ -1,0 +1,67 @@
+:root {
+  /* Core palette */
+  --green:       #00ff88;
+  --green-dim:   rgba(0,255,136,0.22);
+  --green-faint: rgba(0,255,136,0.07);
+  --green-glow:  0 0 20px rgba(0,255,136,0.4);
+  --red:         #ff3333;
+  --red-dim:     rgba(255,51,51,0.2);
+  --amber:       #ffaa00;
+  --amber-dim:   rgba(255,170,0,0.2);
+  --blue:        #00aaff;
+  --blue-dim:    rgba(0,170,255,0.2);
+  --purple:      #cc44ff;
+  --purple-dim:  rgba(204,68,255,0.2);
+  --yellow:      #ffff44;
+  --orange:      #ff6600;
+  --cyan:        #00ffff;
+  /* UI */
+  --bg:          #000a06;
+  --panel:       rgba(0,10,6,0.92);
+  --panel-hover: rgba(0,255,136,0.05);
+  --border:      rgba(0,255,136,0.15);
+  --border-bright: rgba(0,255,136,0.4);
+  --text:        rgba(0,255,136,0.9);
+  --text-dim:    rgba(0,255,136,0.45);
+  --text-faint:  rgba(0,255,136,0.25);
+  /* Layout */
+  --header-h:    52px;
+  --panel-w-l:   240px;
+  --panel-w-r:   220px;
+  --bottom-h:    40px;
+  --panel-gap:   6px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+  width:100%; height:100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+/* Vision modes */
+body.nvg  .cesium-widget canvas { filter: saturate(0) brightness(0.75) sepia(1) hue-rotate(85deg) contrast(1.5); }
+body.flir .cesium-widget canvas { filter: saturate(0) brightness(0.65) sepia(1) hue-rotate(315deg) contrast(1.7); }
+
+/* Cesium cleanup */
+.cesium-widget-credits,
+.cesium-viewer-toolbar,
+.cesium-viewer-animationContainer,
+.cesium-viewer-timelineContainer,
+.cesium-viewer-bottom { display:none !important; }
+
+/* Scrollbars */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--green-dim); border-radius:2px; }
+
+/* Mobile safe area */
+@supports (padding: max(0px)) {
+  .bottomBar { padding-bottom: max(var(--panel-gap), env(safe-area-inset-bottom)); }
+}
