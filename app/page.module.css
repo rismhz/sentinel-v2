@@ -183,9 +183,7 @@
 .radarWrap{display:flex;justify-content:center;margin:4px 0;}
 
 /* ── MOBILE BREAKPOINTS ── */
-@media (max-width: 900px) {
-  :global(:root){--panel-w-l:220px;--panel-w-r:200px;}
-}
+
 
 @media (max-width: 768px) {
   /* Hide desktop side panels */
@@ -214,7 +212,6 @@
 }
 
 @media (max-width: 480px) {
-  :global(:root){--header-h:48px;}
   .hName{font-size:14px;letter-spacing:3px;}
   .hSub{display:none;}
   .badge{display:none;}
