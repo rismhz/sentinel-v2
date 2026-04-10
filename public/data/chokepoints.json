@@ -1,0 +1,14 @@
+[
+  {"n":"Strait of Hormuz","lat":26.56,"lon":56.25,"daily_ships":21,"oil_pct":20,"notes":"Iran / UAE / Oman border — 21M bbl/day"},
+  {"n":"Strait of Malacca","lat":2.50,"lon":101.50,"daily_ships":84000,"oil_pct":16,"notes":"Singapore / Malaysia / Indonesia"},
+  {"n":"Suez Canal","lat":30.42,"lon":32.35,"daily_ships":50,"oil_pct":12,"notes":"Egypt — 12% global trade"},
+  {"n":"Bab-el-Mandeb","lat":12.58,"lon":43.40,"daily_ships":22,"oil_pct":9,"notes":"Yemen / Djibouti — Red Sea access"},
+  {"n":"Panama Canal","lat":9.08,"lon":-79.68,"daily_ships":36,"oil_pct":0,"notes":"Pacific–Atlantic link"},
+  {"n":"Turkish Straits","lat":41.12,"lon":29.08,"daily_ships":45,"oil_pct":3,"notes":"Bosphorus — Russia Black Sea exit"},
+  {"n":"GIUK Gap","lat":65.00,"lon":-15.00,"daily_ships":0,"oil_pct":0,"notes":"Greenland–Iceland–UK NATO ASW barrier"},
+  {"n":"Strait of Gibraltar","lat":35.97,"lon":-5.73,"daily_ships":300,"oil_pct":5,"notes":"Med–Atlantic gate"},
+  {"n":"Lombok Strait","lat":-8.75,"lon":115.75,"daily_ships":18,"oil_pct":0,"notes":"Indonesia — China SSBN egress route"},
+  {"n":"Tsugaru Strait","lat":41.50,"lon":140.90,"daily_ships":20,"oil_pct":0,"notes":"Japan — Russia Pacific access"},
+  {"n":"Taiwan Strait","lat":24.50,"lon":119.50,"daily_ships":50,"oil_pct":0,"notes":"China–Taiwan — highest tension waterway"},
+  {"n":"Danish Straits","lat":55.50,"lon":12.00,"daily_ships":60,"oil_pct":2,"notes":"Baltic Sea access — NATO choke"}
+]

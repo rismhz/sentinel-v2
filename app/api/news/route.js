@@ -1,4 +1,4 @@
-// Multi-source intelligence RSS aggregator â scored & deduplicated
+// Multi-source intelligence RSS aggregator — scored & deduplicated
 const FEEDS = [
   {name:'Aviation Herald',   url:'https://avherald.com/feed',                            cat:'aviation'},
   {name:'Breaking Defense',  url:'https://breakingdefense.com/feed',                     cat:'military'},
@@ -37,13 +37,13 @@ function extractTag(str,tag){
   const open=str.indexOf('<'+tag+'>')
   const close=str.indexOf('</'+tag+'>')
   if(open===-1||close===-1)return''
-  return str.slice(str.indexOf('>', str.indexOf('<'+tag))+1,close)
-    .replace(/x!\[CDATA\\]\]>/g,'').replace(/<[^>]*>/g,'').trim()
+  return str.slice(str.indexOf('>',str.indexOf('<'+tag))+1,close)
+    .replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]+>/g,'').trim()
 }
 
 function parseItems(xml,name,cat){
   const items=[]
-  Letcursor=0
+  let cursor=0
   while(true){
     const start=xml.indexOf('<item>',cursor)
     if(start===-1)break
@@ -52,13 +52,13 @@ function parseItems(xml,name,cat){
     const block=xml.slice(start,end+7)
     cursor=end+7
     const title=extractTag(block,'title')
-    const link=extractTag(block,'link')||extractTag(block,'uid')
+    const link=extractTag(block,'link')||extractTag(block,'guid')
     const desc=extractTag(block,'description')
     const pubDate=extractTag(block,'pubDate')
     if(!title)continue
     const s=score(title+' '+desc)
-    const date=pubDate?new Date(pubDate).toLocaleDateString('en-GB',{day:'2n-digit',month:'short',hour:'2-digit',minute:'2-digit'}):''
-    items.push({id:title.slice(0,30),title,link,source:name,cat,date,urgent:s>=3,score:s})
+    const date=pubDate?new Date(pubDate).toLocaleDateString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}):''
+    items.push({id:title.slice(0,50),title,link,source:name,cat,date,urgent:s>=3,score:s})
   }
   return items
 }
@@ -68,7 +68,7 @@ export async function GET(){
   const results=await Promise.allSettled(
     FEEDS.map(feed=>
       fetch(feed.url,{
-        headers:{'user -agent':'sentinel-v2/2.0','accept':'application/rss+xml,application/xml,text/xml,*/*'},
+        headers:{'User-Agent':'sentinel-v2/2.0','Accept':'application/rss+xml,application/xml,text/xml,*/*'},
         signal:AbortSignal.timeout(6000),
         next:{revalidate:0},
       })
@@ -82,7 +82,7 @@ export async function GET(){
   const items=all
     .sort((a,b)=>b.score-a.score)
     .filter(i=>{
-      const k=i.title.slice(0,30).toLowerCase()
+      const k=i.title.slice(0,50).toLowerCase()
       if(seen.has(k))return false
       seen.add(k)
       return true

@@ -1,17 +1,34 @@
 // Nominatim reverse geocode (free, no key)
 export async function GET(req) {
+  const { searchParams } = new URL(req.url)
+  const lat = searchParams.get('lat')
+  const lon = searchParams.get('lon')
+  const q   = searchParams.get('q')
+
   try {
-    const {searchParams} = req
-    const {lat, lon} = Object.fromEntries(searchParams)
-    const r = await fetch(`https://nominatim.openstreetmap.org/reverse?im=jj,csv&format=json&lat=${lat}&lon=${lon}`, {
+    let url
+    if (q) {
+      url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`
+    } else {
+      url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+    }
+    const r = await fetch(url, {
+      headers: { 'User-Agent': 'sentinel-v2/2.0' },
+      next: { revalidate: 86400 },
       signal: AbortSignal.timeout(5000),
-      headers: {'User-Agent':'sentinel/v2.0'}
-  
-  })
-    if (!r.ok) throw Error('nominatim ' + r.status)
+    })
+    if (!r.ok) throw new Error('Nominatim ' + r.status)
     const d = await r.json()
-    return Response.json({address:d.address,lat:d.lat,lon:d.lon,ts:Date.now()})
-  } catch (e) {
-    return Response.json({error:e.message}, {status:500})
+    if (q) {
+      const f = Array.isArray(d) ? d[0] : d
+      return Response.json({ lat: f?.lat, lon: f?.lon, display: f?.display_name })
+    }
+    return Response.json({
+      country: d.address?.country || '',
+      city:    d.address?.city || d.address?.town || d.address?.village || '',
+      display: d.display_name || '',
+    })
+  } catch(e) {
+    return Response.json({ country:'', city:'', display:'', error: e.message })
   }
 }
